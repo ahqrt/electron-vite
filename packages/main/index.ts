@@ -100,7 +100,7 @@ app.whenReady().then(createWindow).then(async () => {
         .catch((error:any) => console.log(`An error occurred: , ${error}`));
   }
   if (pkg.env.VITRON_TRAY) {
-    const icon = join(__dirname, '../../resources/icon.png')
+    const icon = join(__dirname, '../../resources/icon16.png')
     tray = new Tray(icon)
 
     const contextMenu = Menu.buildFromTemplate([
