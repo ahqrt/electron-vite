@@ -8,7 +8,7 @@ const Example = () => {
 
   return (
     <Box>
-      <div>Hello world</div>
+      <div className="text-3xl">Hello world</div>
     </Box>
   );
 };
