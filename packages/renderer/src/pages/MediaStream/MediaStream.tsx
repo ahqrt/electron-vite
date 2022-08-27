@@ -1,36 +1,35 @@
-import { FC, useEffect, useRef } from "react"
+import { FC, useEffect, useRef } from 'react'
 
 const MediaStreamPage: FC = () => {
-
   const videoRef = useRef<HTMLVideoElement>(null)
-
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   async function init() {
     const mediaDevices = navigator.mediaDevices
-
     const mediaStream = await mediaDevices.getUserMedia({
       video: true,
-      audio: true
+      audio: true,
     })
-
-    console.log('mediaStream', mediaStream);
-
-    const videoTracks = mediaStream.getVideoTracks()
-    console.log('videoTrack', videoTracks);
-
     videoRef.current!.srcObject = mediaStream
-    console.log('videoRef.current!.srcObject', videoRef.current!.srcObject);
+  }
 
+  function getPicture() {
+    const canvas = canvasRef.current!
+    const videoElement = videoRef.current!
+    canvas.width = 640
+    canvas.height = 480
+    canvas.getContext('2d')?.drawImage(videoElement, 0, 0, canvas.width, canvas.height)
   }
 
   useEffect(() => {
     init()
   }, [])
 
-
   return (
-    <div className="w-100">
-      <video ref={videoRef} className=" w-20 h-20 border-gray-300" muted></video>
+    <div className='w-100'>
+      <video ref={videoRef} autoPlay className=' w-40 h-40' muted></video>
+      <button onClick={getPicture}>拍照</button>
+      <canvas ref={canvasRef}></canvas>
     </div>
   )
 }
