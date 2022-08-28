@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import DesktopStreamPage from "../MediaStream/DesktopStream";
 import MediaStreamPage from "../MediaStream/MediaStream";
 const ipcRenderer = window.ipcRenderer || false;
 
@@ -8,8 +9,8 @@ const Example = () => {
 
   return (
     <Box>
-      {/* <div className="text-3xl">Hello world</div> */}
-      <MediaStreamPage />
+      {/* <MediaStreamPage /> */}
+      <DesktopStreamPage />
     </Box>
   );
 };
