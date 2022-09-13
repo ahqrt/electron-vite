@@ -1,26 +1,9 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider  } from '@mui/material/styles';
-import App from './App';
-import './styles/index.css';
-import theme from './styles/theme';
+import App from './App'
+import './styles/index.css'
 
 const root = createRoot(document.getElementById('root')!)
 
-root.render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </StrictMode>
-);
+root.render(<App />)
 
 window.removeLoading()
-
-// console.log('fs', window.fs);
-// console.log('ipcRenderer', window.ipcRenderer);
-
-// Usage of ipcRenderer.on
-window.ipcRenderer.on('main-process-message', (_event, ...args) => {
-  console.log('[Receive Main-process message]:', ...args);
-});

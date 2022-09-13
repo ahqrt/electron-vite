@@ -5,6 +5,7 @@ import { useLoading } from './loading';
 import { Titlebar, Color } from 'custom-electron-titlebar';
 import pkg from '../../package.json';
 const { appendLoading, removeLoading } = useLoading();
+import loudness from 'loudness'
 
 (async () => {
   await domReady();
@@ -31,7 +32,9 @@ window.addEventListener('DOMContentLoaded', () => {
 contextBridge.exposeInMainWorld('fs', fs);
 contextBridge.exposeInMainWorld('removeLoading', removeLoading);
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer));
-
+contextBridge.exposeInMainWorld('volumeAPI', {
+  getVolume: loudness.getVolume 
+})
 // contextBridge.exposeInMainWorld('store', withPrototype(store))
 
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
