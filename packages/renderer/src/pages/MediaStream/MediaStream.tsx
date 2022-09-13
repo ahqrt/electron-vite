@@ -1,4 +1,5 @@
-import { FC, useEffect, useRef } from 'react'
+import type { FC } from 'react'
+import { useEffect, useRef } from 'react'
 
 const MediaStreamPage: FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -25,11 +26,10 @@ const MediaStreamPage: FC = () => {
     canvas.getContext('2d')?.drawImage(videoElement, 0, 0, canvas.width, canvas.height)
   }
 
-
   function startRecord() {
     buffer = []
     const options: MediaRecorderOptions = {
-      mimeType: 'video/webm;codes=vp8'
+      mimeType: 'video/webm;codes=vp8',
     }
     if (!MediaRecorder.isTypeSupported(options.mimeType!)) {
       console.warn(`${options.mimeType} is not supported`)
@@ -41,16 +41,15 @@ const MediaStreamPage: FC = () => {
       localMediaRecorder = mediaRecorder
       mediaRecorder.ondataavailable = handleDataAvailable
       mediaRecorder.start(10)
-    } catch (e) {
+    }
+    catch (e) {
       console.error('Failed to create MediaRecorder', e)
-      return
     }
   }
 
   function handleDataAvailable(e: BlobEvent) {
-    if (e?.data?.size > 0) {
+    if (e?.data?.size > 0)
       buffer.push(e.data)
-    }
   }
 
   function stopRecord() {
@@ -81,15 +80,15 @@ const MediaStreamPage: FC = () => {
   }, [])
 
   return (
-    <div className='w-100'>
-      <video ref={videoRef} autoPlay className=' w-40 h-40' muted></video>
+    <div className="w-100">
+      <video ref={videoRef} autoPlay className=" w-40 h-40" muted></video>
       <button onClick={getPicture}>拍照</button>
       <button onClick={startRecord}>开始录制</button>
       <button onClick={stopRecord}>停止录制</button>
       <button onClick={playRecordFile}>播放录制文件</button>
       <button onClick={downloadRecord}>下载</button>
       <canvas ref={canvasRef}></canvas>
-      <video id='recvideo' style={{ width: 200, height: 200 }}></video>
+      <video id="recvideo" style={{ width: 200, height: 200 }}></video>
     </div>
   )
 }

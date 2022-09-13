@@ -1,4 +1,5 @@
-import { FC, useRef } from 'react'
+import type { FC } from 'react'
+import { useRef } from 'react'
 
 const DesktopStreamPage: FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -12,9 +13,9 @@ const DesktopStreamPage: FC = () => {
   }
 
   return (
-    <div className='w-100'>
+    <div className="w-100">
       <button onClick={initStream}>开始共享屏幕</button>
-      <video ref={videoRef} autoPlay className=' w-40 h-40' muted></video>
+      <video ref={videoRef} autoPlay className=" w-40 h-40" muted></video>
     </div>
   )
 }
